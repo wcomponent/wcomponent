@@ -109,9 +109,43 @@
     <div class="g--10 m--1">
       <h2 class="fade-in-from-top">Web Component Library</h2>
     </div>
-    <div class="g--10 m--1 container container--wrap--s">
+    <div class="g--10 m--1">
       <div class="card g--4 g-m--6 g-s--10 g-t--12">
         <wc-login></wc-login>
+      </div>
+      <div class='card g--12 g-m--6 g-s--10 g-t--12'>
+        <pre><code style="overflow-x:auto;display:block">
+&lt;element name=&apos;wc-login&apos;&gt;
+  &lt;template&gt;
+    &lt;form data-submit=&apos;onSubmit&apos;&gt;
+      &lt;label&gt;User Name&lt;/label&gt;
+      &lt;input data-model=&apos;username&apos; type=&apos;text&apos; placeholder=&apos;User Name&apos;&gt;
+      &lt;label&gt;Password&lt;/label&gt;
+      &lt;input data-model=&apos;password&apos; type=&apos;password&apos;&gt;
+      &lt;button type=&apos;submit&apos; class=&quot;btn--raised btn--primary&quot;&gt;Login&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/template&gt;
+  &lt;script&gt;
+    WComponent(&apos;wc-login&apos;, {
+      callbacks: {
+        created: function(){
+          console.log(&apos;created;login&apos;)
+
+        }
+      },
+      model: {
+        username: &apos;somnath-kokane&apos;,
+        password: &apos;wcomponent&apos;
+      },
+      events: {
+        onSubmit: function(){
+          alert(JSON.stringify(this.model));
+        }
+      }
+    });
+  &lt;/script&gt;
+&lt;/element&gt;
+        </code></pre>
       </div>
     </div>
   </main>
