@@ -194,7 +194,7 @@
             element = document.querySelector(['name='+name]);
         }
         if(element){
-            template = element.querySelector('template');
+            template = script.parentNode ? script.parentNode.querySelector('template') : null;
         }
 
         proto.createdCallback = {
