@@ -12,7 +12,22 @@
     };
 
     var binders = {
-        events: function(node, type, object){
+        submit: function(node, key, object){
+            var ev = binders.events(node, 'submit', object);
+            ev.update(function(ev){
+                console.log('type', key);
+                var fn = object.events[key];
+                if(fn){
+                    fn.apply(this, arguments);
+                }
+            });
+            return {
+                update: function(fn){
+                    fn && fn.apply(object, arguments);
+                }
+            }
+        },
+        events: function(node, type, object, eventName){
             var previous;
             return {
                 update: function(fn){
@@ -32,7 +47,7 @@
             var ev = binders.events(node, 'keyup', object);
             var value = node.value;
             ev.update(debounce(function(){
-                object[key] = node.value;
+                object.model[key] = node.value;
             }, 10));
             return {
                 update: function(value){
@@ -118,7 +133,7 @@
     }
 
     function bindModel(element, object){
-        var dataAttrs = ['model', 'bind'];
+        var dataAttrs = ['model', 'bind', 'submit'];
         var bindings = [];
         dataAttrs.forEach(function(attr){
             var selector = '[data-'+attr+']';
