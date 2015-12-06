@@ -6,25 +6,124 @@
      <title>WComponent</title>
      <meta name="description" content="">
      <meta name="viewport" content="width=device-width, initial-scale=1"> 
-     
+     <link rel="stylesheet" type="text/css" href="dist/css/surface_styles.css">
      <script src="dist/wcomponent.min.js"></script>
+     <style>
+          body /deep/ input[type="email"]:focus, 
+          body /deep/ input[type="email"]:valid, 
+          body /deep/ input[type="text"]:focus, 
+          body /deep/ input[type="text"]:valid, 
+          body /deep/ input[type="password"]:focus, 
+          body /deep/ input[type="password"]:valid, 
+          body /deep/ input[type="textarea"]:focus, 
+          body /deep/ input[type="textarea"]:valid {
+              background-position: 0 0;
+              box-shadow: none;
+              outline: 0 none;
+          }
+          body /deep/ input[type="email"], 
+          body /deep/ input[type="text"], 
+          body /deep/ input[type="password"], 
+          body /deep/ input[type="textarea"] {
+              -moz-border-bottom-colors: none;
+              -moz-border-left-colors: none;
+              -moz-border-right-colors: none;
+              -moz-border-top-colors: none;
+              background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 96%) no-repeat scroll 100%;
+              border-color: -moz-use-text-color -moz-use-text-color #1abc9c;
+              border-image: none;
+              border-style: none none solid;
+              border-width: medium medium 1px;
+              color: #0e6252;
+              display: block;
+              margin-bottom: 40px;
+              padding: 10px 0;
+              transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1) 0s;
+              width: 100%;
+              will-change: background-position;
+          }
+
+          body /deep/ [class*="btn"]::after {
+              background: rgba(0, 0, 0, 0) radial-gradient(circle, #fff 95%, transparent 95%) no-repeat scroll 50% 50% / 0.7% auto;
+              content: "";
+              position: absolute;
+              transition: none 0s ease 0s ;
+          }
+          body /deep/ .btn--primary {
+              background-color: #1abc9c;
+              background-image: radial-gradient(circle, #1abc9c 1%, #3ee4c4 15%, transparent 30%);
+          }
+          body /deep/ .btn--raised, .modal-trigger, .modal-trigger::after {
+              background-color: #3498db;
+              background-image: radial-gradient(circle, #3498db 1%, #75b9e7 15%, transparent 30%);
+              border-radius: 1.98px;
+              box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+              color: #fff;
+              will-change: box-shadow, background-color;
+          }
+          body /deep/ [class*="btn"] {
+              background-image: none;
+              background-position: 50% 50%;
+              background-repeat: no-repeat;
+              background-size: 0 auto;
+              border: 0 none;
+              box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+              cursor: pointer;
+              display: inline-block;
+              font-family: Roboto;
+              margin-bottom: 10px;
+              padding: 10px 20px;
+              position: relative;
+              text-transform: uppercase;
+              transition: background-color 0.3s cubic-bezier(0.64, 0.09, 0.08, 1) 0s, box-shadow 0.3s cubic-bezier(0.64, 0.09, 0.08, 1) 0s;
+              will-change: background-size, background-image;
+          }
+          body /deep/ button {
+              border: medium none;
+              cursor: pointer;
+          }
+      </style>
    </head>
  <body>
-  <wc-login></wc-login>
+  <input type="checkbox" id="nav--super-vertical-responsive">
+  <label for="nav--super-vertical-responsive">MENU</label>
+  <aside class="nav--super-vertical g--2 g-m--3 g-s--6 g-t--12 no-margin-vertical">
+    <div class="g--12 logo-area no-margin-vertical">
+      <h4 class="no-margin-vertical">WComponent</h5>
+    </div>
+    <nav class="g--12 no-margin-vertical">
+      <a href="#!">Getting Started</a>
+      <div class="nav-collapsible">
+        <input type="checkbox" id="nav-collapsible-1">
+        <label for="nav-collapsible-1">Components</label>
+        <div class="nav-collapsible-links">
+          <a href="#!">Login</a>
+        </div>
+      </div>
+    </nav>
+  </aside>
+  <main class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
+    <header class="container--wrap">
+      <h1 class="m--1 g--4 g-s--12">WComponent</h1>
+    </header>
+    <div class="g--10 m--1">
+      <h2 class="fade-in-from-top">Web Component Library</h2>
+    </div>
+    <div class="g--10 m--1 container container--wrap--s">
+      <div class="card g--4 g-m--6 g-s--10 g-t--12">
+        <wc-login></wc-login>
+      </div>
+    </div>
+  </main>
+  
   <element name='wc-login'>
     <template>
-    <form data-submit='onSubmit'>
-        <p>
-          <label>User Name</label>
-          <input data-model='username' type='text'>
-        </p>
-        <p>
-          <label>Password</label>
-          <input data-model='password' type='password'>
-        </p>
-        <p>
-          <button type='submit'>Login</button>
-        </p>
+      <form data-submit='onSubmit'>
+        <label>User Name</label>
+        <input data-model='username' type='text' placeholder='User Name'>
+        <label>Password</label>
+        <input data-model='password' type='password'>
+        <button type='submit' class="btn--raised btn--primary">Login</button>
       </form>
     </template>
     <script>
