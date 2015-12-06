@@ -86,6 +86,36 @@
       </style>
    </head>
  <body>
+   <element name='wc-login'>
+    <template>
+      <form data-submit='onSubmit'>
+        <label>User Name</label>
+        <input data-model='username' type='text' placeholder='User Name'>
+        <label>Password</label>
+        <input data-model='password' type='password'>
+        <button type='submit' class="btn--raised btn--primary">Login</button>
+      </form>
+    </template>
+    <script>
+      WComponent('wc-login', {
+        callbacks: {
+          created: function(){
+            console.log('created;login')
+
+          }
+        },
+        model: {
+          username: 'somnath-kokane',
+          password: 'wcomponent'
+        },
+        events: {
+          onSubmit: function(){
+            alert(JSON.stringify(this.model));
+          }
+        }
+      });
+    </script>
+  </element>
   <input type="checkbox" id="nav--super-vertical-responsive">
   <label for="nav--super-vertical-responsive">MENU</label>
   <aside class="nav--super-vertical g--2 g-m--3 g-s--6 g-t--12 no-margin-vertical">
@@ -150,36 +180,5 @@
       </div>
     </div>
   </main>
-  
-  <element name='wc-login'>
-    <template>
-      <form data-submit='onSubmit'>
-        <label>User Name</label>
-        <input data-model='username' type='text' placeholder='User Name'>
-        <label>Password</label>
-        <input data-model='password' type='password'>
-        <button type='submit' class="btn--raised btn--primary">Login</button>
-      </form>
-    </template>
-    <script>
-      WComponent('wc-login', {
-        callbacks: {
-          created: function(){
-            console.log('created;login')
-
-          }
-        },
-        model: {
-          username: 'somnath-kokane',
-          password: 'wcomponent'
-        },
-        events: {
-          onSubmit: function(){
-            alert(JSON.stringify(this.model));
-          }
-        }
-      });
-    </script>
-  </element>
 </body>
 </html>
