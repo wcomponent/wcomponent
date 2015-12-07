@@ -178,5 +178,33 @@
       </div>
     </div>
   </main>
+  <element name='wc-admin-login'>
+    <template is='wc-template' extends='wc-login'></template>
+    <script>
+      WComponent('wc-admin-login', {
+        'extends': 'wc-login',
+        callbacks: {
+          created: function(){
+            console.log('this', this);
+            this.model.username = 'admin';
+            this.model.password = 'admin';
+          }
+        }
+      });
+    </script>
+  </element>
+  <script>
+    WComponent('x-template', {
+      extends: 'template',
+      callbacks: {
+        init: function(){
+          this.extendsTemplate = this.attributes.extends;
+        },
+        created: function(){
+
+        }
+      }
+    });
+  </script>
 </body>
 </html>

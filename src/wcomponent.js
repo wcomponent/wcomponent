@@ -68,7 +68,7 @@
         }
     };
 
-    WComponent.components = {};
+    WComponent.wcs = {};
 
     window.WComponent = WComponent;
 
@@ -124,6 +124,15 @@
         }, 60);
     }
 
+    function ObjectMixin(src, dest){
+        for(var key in dest){
+            if(dest.hasOwnProperty(key)){
+                src[key] = dest[key];
+            }
+        }
+        return src;
+    }
+
     function ArrayFilter(collection, fn){
         return Array.prototype.filter.call(collection, fn);
     }
@@ -165,28 +174,34 @@
 
     function WComponent(name, options){
         var 
-            component,
+            wc,
+            superWc,
             element,
             events,
             registeredElement,
             elementDef = {},
             basePrototype,
             _extends,
+            extendsElement,
             template,
+            templateAttrs,
+            extendsTemplate,
             callbacks,
             _name = toHTMLElement(name),
             _HTMLElement = getHTMLElement(_extends),
             proto;
 
-        component = WComponent.components[_name] = options || {};
-        component.name = name;
-        basePrototype = component.prototype;
-        _extends = component['extends'];
-        template = component['template'];
-        callbacks = component.callbacks || {};
-        events = component.events;
+        wc = WComponent.wcs[_name] = options || {};
+        wc.name = name;
+        basePrototype = wc.prototype;
+        _extends = wc['extends'];
+        template = wc['template'];
+        callbacks = wc.callbacks || {};
+        events = wc.events;
         proto = Object.create(basePrototype || {});
-        
+
+        extendsElement = toHTMLElement(_extends);
+
         var script = (document.currentScript || document._currentScript);
         if(script){
             element = script.parentNode;
@@ -197,12 +212,33 @@
             template = element.querySelector('template');
         }
 
+        if(template){
+            templateAttrs = template.attributes;
+            if('extends' in templateAttrs){
+                extendsTemplate = toHTMLElement(template.getAttribute('extends'));
+                extendsTemplate = WComponent.wcs[extendsTemplate];
+                template = (extendsTemplate && extendsTemplate.template) ? extendsTemplate.template : template;
+            }
+        }
+
+        if(extendsElement in WComponent.wcs){
+            proto = Object.create((window[extendsElement]).constructor.prototype, proto);
+            _extends = undefined;
+            superWc = WComponent.wcs[extendsElement];
+            template = template || superWc.template;
+            wc = ObjectMixin(superWc, wc);
+        }
+
+        wc.template = template;
+        wc.init && wc.init();
+
         proto.createdCallback = {
             enumerable: true, 
             writable: true,
             value: function(){
+                this.wc = wc;
                 if(callbacks.created){
-                    callbacks.created.call(component, this);
+                    callbacks.created.call(wc, this);
                 }
                 createdCallback.apply(this, arguments);
             }
@@ -223,10 +259,10 @@
             enumerable: true,
             writable: true,
             value: function(){
-                detachedCallback.apply(this, arguments);
                 if(callbacks.detached){
-                    callbacks.detached.apply(this, arguments);
+                    callbacks.detached.apply(wc, arguments);
                 }
+                detachedCallback.apply(this, arguments);
             }
         };
 
@@ -234,10 +270,10 @@
             enumerable: true,
             writable: true,
             value: function(){
-                attributeChangedCallback.apply(this, arguments);
                 if(callbacks.attributeChanged){
-                    callbacks.attributeChanged.apply(this, arguments);
+                    callbacks.attributeChanged.apply(wc, arguments);
                 }
+                attributeChangedCallback.apply(this, arguments);
             }
         }
 
@@ -256,12 +292,17 @@
             var content = template && template.content ? template.content : getTemplateContent(element);;
             var data = {};
             if(content) {
+                wc.content = content;
                 if(iUse.shadow){
                      container = this.createShadowRoot();
                 }
                 container.appendChild(document.importNode(content, true));
             }
+<<<<<<< HEAD
             bindModel(container, options);
+=======
+            bindModel(element, wc);
+>>>>>>> origin
         }
 
         function attachedCallback(){}
@@ -271,6 +312,7 @@
         function attributeChangedCallback(){}
     }
 
+<<<<<<< HEAD
     function getTemplateContent(node){
         var child;
         var fragment = document.createDocumentFragment(); 
@@ -278,6 +320,27 @@
             fragment.appendChild(child); 
         } 
         return fragment; 
+=======
+    function getTemplateContent(template){
+
+        if(!template){
+            return undefined;
+        }
+        if(template.content){
+            return template.content;
+        }
+        var templateElement = document.createElement('template');
+        if(template.firstChild){
+            
+            while(template.firstChild){
+                templateElement.appendChild(template.firstChild);
+            }
+        } else {
+            templateElement.innerHTML = template;
+        }
+       
+        return templateElement.content;
+>>>>>>> origin
     }
 
     function getHTMLElement(name){
