@@ -14,9 +14,10 @@
      <script src="libs/document-register-element.js"></script>
      <script src="libs/Object.observe.poly.js"></script>
      <script src="src/wcomponent.js"></script>
+
    </head>
  <body>
-  <wc-login></wc-login>
+  <wc-admin-login attributes='username, password'></wc-admin-login>
   <element name='wc-login'>
     <template>
     <form data-submit='onSubmit'>
@@ -38,7 +39,6 @@
         callbacks: {
           created: function(){
             console.log('created;login')
-
           }
         },
         model: {
@@ -53,5 +53,33 @@
       });
     </script>
   </element>
+  <element name='wc-admin-login'>
+    <template is='wc-template' extends='wc-login'></template>
+    <script>
+      WComponent('wc-admin-login', {
+        'extends': 'wc-login',
+        callbacks: {
+          created: function(){
+            console.log('this', this);
+            this.model.username = 'admin';
+            this.model.password = 'admin';
+          }
+        }
+      });
+    </script>
+  </element>
+  <script>
+    WComponent('x-template', {
+      extends: 'template',
+      callbacks: {
+        init: function(){
+          this.extendsTemplate = this.attributes.extends;
+        },
+        created: function(){
+
+        }
+      }
+    });
+  </script>
 </body>
 </html>
