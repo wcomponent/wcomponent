@@ -253,13 +253,13 @@
 
         function createdCallback(){
             var container = this;
-            var content = getTemplateContent(template|| element);
+            var content = template && template.content ? template.content : getTemplateContent(element);;
             var data = {};
             if(content) {
                 if(iUse.shadow){
                      container = this.createShadowRoot();
                 }
-                container.appendChild(content.cloneNode(true));
+                container.appendChild(document.importNode(content, true));
             }
             bindModel(container, options);
         }
@@ -271,25 +271,12 @@
         function attributeChangedCallback(){}
     }
 
-    function getTemplateContent(template){
-
-        if(!template){
-            return undefined;
-        }
-        if(template.content){
-            return template.content;
-        }
-        var templateElement = document.createElement('template');
-        if(template.firstChild){
-            var child;
-            while(child = template.firstChild){
-                templateElement.appendChild(child);
-            }
-        } else {
-            templateElement.innerHTML = template;
-        }
-       
-        return templateElement.content;
+    function getTemplateContent(node){
+        var fragment = document.createDocumentFragment(); 
+        while (child = node.firstChild) { 
+            fragment.appendChild(child); 
+        } 
+        return fragment; 
     }
 
     function getHTMLElement(name){
