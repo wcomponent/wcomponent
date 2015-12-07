@@ -252,16 +252,16 @@
         return registeredElement;
 
         function createdCallback(){
-            var element = this;
-            var content = getTemplateContent(template);
+            var container = this;
+            var content = getTemplateContent(template|| element);
             var data = {};
             if(content) {
                 if(iUse.shadow){
-                     element = this.createShadowRoot();
+                     container = this.createShadowRoot();
                 }
-                element.appendChild(content.cloneNode(true));
+                container.appendChild(content.cloneNode(true));
             }
-            bindModel(element, options);
+            bindModel(node, options);
         }
 
         function attachedCallback(){}
