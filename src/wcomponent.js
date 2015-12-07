@@ -194,7 +194,7 @@
             element = document.querySelector(['name='+name]);
         }
         if(element){
-            template = script.parentNode ? script.parentNode.querySelector('template') : null;
+            template = element.querySelector('template') : null;
         }
 
         proto.createdCallback = {
@@ -253,10 +253,9 @@
 
         function createdCallback(){
             var element = this;
-            var content;
+            var content = getTemplateContent(template);
             var data = {};
             if(template) {
-                content = getTemplateContent(template);
                 if(iUse.shadow){
                      element = this.createShadowRoot();
                 }
