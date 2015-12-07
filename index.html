@@ -7,8 +7,7 @@
      <meta name="description" content="">
      <meta name="viewport" content="width=device-width, initial-scale=1"> 
      <link rel="stylesheet" type="text/css" href="dist/css/surface_styles.css">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents.js"></script>
-     <script src="src/wcomponent.js"></script>
+     <script src="src/wcomponent.min.js"></script>
      <style>
           body /deep/ input[type="email"]:focus, 
           body /deep/ input[type="email"]:valid, 
@@ -87,20 +86,20 @@
    </head>
  <body>
    <element name='wc-login'>
-    <form data-submit='onSubmit'>
-      <label>User Name</label>
-      <input data-model='username' type='text' placeholder='User Name'>
-      <label>Password</label>
-      <input data-model='password' type='password'>
-      <button type='submit' class="btn--raised btn--primary">Login</button>
-    </form>
+    <template>
+      <form data-submit='onSubmit'>
+        <label>User Name</label>
+        <input data-model='username' type='text' placeholder='User Name'>
+        <label>Password</label>
+        <input data-model='password' type='password'>
+        <button type='submit' class="btn--raised btn--primary">Login</button>
+      </form>
+    </template> 
     <script>
       WComponent('wc-login', {
         callbacks: {
           created: function(){
-            console.log('created;login')
-
-          }
+            console.log('created:login');
         },
         model: {
           username: 'somnath-kokane',
