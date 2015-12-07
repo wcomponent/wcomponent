@@ -9,22 +9,22 @@
      <link rel="stylesheet" type="text/css" href="dist/css/surface_styles.css">
      <script src="dist/wcomponent.min.js"></script>
      <style>
-          body /deep/ input[type="email"]:focus, 
-          body /deep/ input[type="email"]:valid, 
-          body /deep/ input[type="text"]:focus, 
-          body /deep/ input[type="text"]:valid, 
-          body /deep/ input[type="password"]:focus, 
-          body /deep/ input[type="password"]:valid, 
-          body /deep/ input[type="textarea"]:focus, 
-          body /deep/ input[type="textarea"]:valid {
+          * /deep/ input[type="email"]:focus, 
+          * /deep/ input[type="email"]:valid, 
+          * /deep/ input[type="text"]:focus, 
+          * /deep/ input[type="text"]:valid, 
+          * /deep/ input[type="password"]:focus, 
+          * /deep/ input[type="password"]:valid, 
+          * /deep/ input[type="textarea"]:focus, 
+          * /deep/ input[type="textarea"]:valid {
               background-position: 0 0;
               box-shadow: none;
               outline: 0 none;
           }
-          body /deep/ input[type="email"], 
-          body /deep/ input[type="text"], 
-          body /deep/ input[type="password"], 
-          body /deep/ input[type="textarea"] {
+          * /deep/ input[type="email"], 
+          * /deep/ input[type="text"], 
+          * /deep/ input[type="password"], 
+          * /deep/ input[type="textarea"] {
               -moz-border-bottom-colors: none;
               -moz-border-left-colors: none;
               -moz-border-right-colors: none;
@@ -43,17 +43,17 @@
               will-change: background-position;
           }
 
-          body /deep/ [class*="btn"]::after {
+          * /deep/ [class*="btn"]::after {
               background: rgba(0, 0, 0, 0) radial-gradient(circle, #fff 95%, transparent 95%) no-repeat scroll 50% 50% / 0.7% auto;
               content: "";
               position: absolute;
               transition: none 0s ease 0s ;
           }
-          body /deep/ .btn--primary {
+          * /deep/ .btn--primary {
               background-color: #1abc9c;
               background-image: radial-gradient(circle, #1abc9c 1%, #3ee4c4 15%, transparent 30%);
           }
-          body /deep/ .btn--raised, .modal-trigger, .modal-trigger::after {
+          * /deep/ .btn--raised, .modal-trigger, .modal-trigger::after {
               background-color: #3498db;
               background-image: radial-gradient(circle, #3498db 1%, #75b9e7 15%, transparent 30%);
               border-radius: 1.98px;
@@ -61,7 +61,7 @@
               color: #fff;
               will-change: box-shadow, background-color;
           }
-          body /deep/ [class*="btn"] {
+          * /deep/ [class*="btn"] {
               background-image: none;
               background-position: 50% 50%;
               background-repeat: no-repeat;
@@ -78,7 +78,7 @@
               transition: background-color 0.3s cubic-bezier(0.64, 0.09, 0.08, 1) 0s, box-shadow 0.3s cubic-bezier(0.64, 0.09, 0.08, 1) 0s;
               will-change: background-size, background-image;
           }
-          body /deep/ button {
+          * /deep/ button {
               border: medium none;
               cursor: pointer;
           }
