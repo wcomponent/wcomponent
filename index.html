@@ -182,6 +182,22 @@
         <wc-admin-login></wc-admin-login>
       </div>
       <div class='card g--12 g-m--6 g-s--10 g-t--12'>
+        <pre>
+          <code>
+&lt;element name=&apos;wc-admin-login&apos;&gt;
+  &lt;template is=&apos;wc-template&apos; extends=&apos;wc-login&apos;&gt;&lt;/template&gt;
+  &lt;script&gt;
+    WComponent(&apos;wc-admin-login&apos;, {
+      &apos;extends&apos;: &apos;wc-login&apos;,
+      model: {
+        username: &apos;admin&apos;,
+        password: &apos;admin&apos;
+      }
+    });
+  &lt;/script&gt;
+&lt;/element&gt;
+          </code>
+        </pre>
       </div>
     </div>
   </main>
