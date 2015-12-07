@@ -177,22 +177,14 @@
         </code></pre>
       </div>
     </div>
+    <div class="g--10 m--1">
+      <div class="card g--4 g-m--6 g-s--10 g-t--12">
+        <wc-admin-login></wc-admin-login>
+      </div>
+      <div class='card g--12 g-m--6 g-s--10 g-t--12'>
+      </div>
+    </div>
   </main>
-  <element name='wc-admin-login'>
-    <template is='wc-template' extends='wc-login'></template>
-    <script>
-      WComponent('wc-admin-login', {
-        'extends': 'wc-login',
-        callbacks: {
-          created: function(){
-            console.log('this', this);
-            this.model.username = 'admin';
-            this.model.password = 'admin';
-          }
-        }
-      });
-    </script>
-  </element>
   <script>
     WComponent('x-template', {
       extends: 'template',
@@ -206,5 +198,17 @@
       }
     });
   </script>
+  <element name='wc-admin-login'>
+    <template is='wc-template' extends='wc-login'></template>
+    <script>
+      WComponent('wc-admin-login', {
+        'extends': 'wc-login',
+        model: {
+          username: 'admin',
+          password: 'admin'
+        }
+      });
+    </script>
+  </element>
 </body>
 </html>

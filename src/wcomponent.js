@@ -124,10 +124,13 @@
         }, 60);
     }
 
-    function ObjectMixin(src, dest){
-        for(var key in dest){
-            if(dest.hasOwnProperty(key)){
-                src[key] = dest[key];
+    function ObjectMixin(src){
+        var args = ArraySlice(arguments, 1);
+        for(var i = 0, len = args.length; i < len; i ++){
+            for(var key in args[i]){
+                if(args[i].hasOwnProperty(key)){
+                    src[key] = args[i][key];
+                }
             }
         }
         return src;
@@ -226,7 +229,7 @@
             _extends = undefined;
             superWc = WComponent.wcs[extendsElement];
             template = template || superWc.template;
-            wc = ObjectMixin(superWc, wc);
+            wc = ObjectMixin({}, superWc, wc);
         }
 
         wc.template = template;
@@ -288,21 +291,17 @@
         return registeredElement;
 
         function createdCallback(){
-            var container = this;
-            var content = template && template.content ? template.content : getTemplateContent(element);;
+            var element = this;
+            var content = getTemplateContent(template);
             var data = {};
             if(content) {
                 wc.content = content;
                 if(iUse.shadow){
-                     container = this.createShadowRoot();
+                     element = this.createShadowRoot();
                 }
-                container.appendChild(document.importNode(content, true));
+                element.appendChild(document.importNode(content, true));
             }
-<<<<<<< HEAD
-            bindModel(container, options);
-=======
             bindModel(element, wc);
->>>>>>> origin
         }
 
         function attachedCallback(){}
@@ -312,15 +311,6 @@
         function attributeChangedCallback(){}
     }
 
-<<<<<<< HEAD
-    function getTemplateContent(node){
-        var child;
-        var fragment = document.createDocumentFragment(); 
-        while (child = node.firstChild) { 
-            fragment.appendChild(child); 
-        } 
-        return fragment; 
-=======
     function getTemplateContent(template){
 
         if(!template){
@@ -340,7 +330,6 @@
         }
        
         return templateElement.content;
->>>>>>> origin
     }
 
     function getHTMLElement(name){
