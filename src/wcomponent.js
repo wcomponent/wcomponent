@@ -261,7 +261,7 @@
                 }
                 container.appendChild(content.cloneNode(true));
             }
-            bindModel(node, options);
+            bindModel(container, options);
         }
 
         function attachedCallback(){}
