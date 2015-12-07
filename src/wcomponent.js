@@ -272,8 +272,9 @@
     }
 
     function getTemplateContent(node){
+        var child;
         var fragment = document.createDocumentFragment(); 
-        while (var child = node.firstChild) { 
+        while (child = node.firstChild) { 
             fragment.appendChild(child); 
         } 
         return fragment; 
