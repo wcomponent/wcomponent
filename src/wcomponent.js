@@ -253,9 +253,10 @@
 
         function createdCallback(){
             var element = this;
-            var content = getTemplateContent(template);
+            var content;
             var data = {};
-            if(content) {
+            if(template) {
+                content = getTemplateContent(template);
                 if(iUse.shadow){
                      element = this.createShadowRoot();
                 }
