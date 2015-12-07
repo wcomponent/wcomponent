@@ -255,7 +255,7 @@
             var element = this;
             var content = getTemplateContent(template);
             var data = {};
-            if(template) {
+            if(content) {
                 if(iUse.shadow){
                      element = this.createShadowRoot();
                 }
