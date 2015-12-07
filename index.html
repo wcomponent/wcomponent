@@ -87,15 +87,13 @@
    </head>
  <body>
    <element name='wc-login'>
-    <template>
-      <form data-submit='onSubmit'>
-        <label>User Name</label>
-        <input data-model='username' type='text' placeholder='User Name'>
-        <label>Password</label>
-        <input data-model='password' type='password'>
-        <button type='submit' class="btn--raised btn--primary">Login</button>
-      </form>
-    </template>
+    <form data-submit='onSubmit'>
+      <label>User Name</label>
+      <input data-model='username' type='text' placeholder='User Name'>
+      <label>Password</label>
+      <input data-model='password' type='password'>
+      <button type='submit' class="btn--raised btn--primary">Login</button>
+    </form>
     <script>
       WComponent('wc-login', {
         callbacks: {
